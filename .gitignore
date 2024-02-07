@@ -1,0 +1,9 @@
+*.log
+*.a
+*.o
+my_navy
+.vscode
+pos_boat
+*.gcno
+*.gcda
+unit_tests
