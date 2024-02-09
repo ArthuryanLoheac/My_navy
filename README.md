@@ -5,6 +5,12 @@ Le jeu se termine lorsqu'un joueur a perdu tous ses navires, et le programme aff
 
 Fonctionnement :
 
+Joueur 1 :
+./my_navy fichier_bateaux
+
+Joueur 2 :
+./my_navy PID_Joueur_1 fichier_bateaux
+
 Le programme prend en entrée le PID (Process ID) du premier joueur (seulement pour le deuxième joueur) et un fichier représentant les positions des navires.
 Ce fichier doit contenir des lignes formatées de la manière suivante: "LENGTH:FIRST_POSITION:LAST_POSITION", où LENGTH est la longueur du navire et FIRST_POSITION et LAST_POSITION sont ses positions initiales et finales de chaques bateaux.
 Le fichier doit contenir exactement 4 bateaux de tailles (2, 3, 4 et 5).
