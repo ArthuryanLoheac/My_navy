@@ -1,6 +1,7 @@
 # My_navy  
 Compilation avec :  
 > make
+
 Le projet "MY_NAVY" consiste à créer une version terminal du jeu de bataille navale en utilisant des signaux en langage C.  
 Les deux terminaux ne peuvent communiquer qu'en utilisant les signaux SIGUSER1 et SIGUSER2.  
 La carte de jeu est de taille 8x8 et à chaque tour, les positions des joueurs sont affichées, suivies des positions de l'ennemi.  
