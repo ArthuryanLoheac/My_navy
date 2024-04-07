@@ -1,20 +1,62 @@
-# My_navy  
-Compilation avec :  
-> make
+# MY_NAVY
 
-Le projet "MY_NAVY" consiste à créer une version terminal du jeu de bataille navale en utilisant des signaux en langage C.  
-Les deux terminaux ne peuvent communiquer qu'en utilisant les signaux SIGUSER1 et SIGUSER2.  
-La carte de jeu est de taille 8x8 et à chaque tour, les positions des joueurs sont affichées, suivies des positions de l'ennemi.  
-Le jeu se termine lorsqu'un joueur a perdu tous ses navires, et le programme affiche alors si "I won" (j'ai gagné) ou "Enemy won" (l'ennemi a gagné).  
+"MY_NAVY" is a terminal-based version of the classic game Battleship, where two players compete to sink each other's ships. This implementation requires players to use signals in C for communication, adhering strictly to the rules of the traditional Battleship game, but with a twist—communication is solely through SIGUSER1 and SIGUSER2 signals.
 
-Fonctionnement :
+## Preliminaries
 
-Joueur 1 :
-./my_navy fichier_bateaux
+- **Binary Name:** my_navy
+- **Language:** C
+- **Group Size:** 2
+- **Compilation:** Via Makefile, including `re`, `clean`, and `fclean` rules.
+- **Authorized Functions:** open, close, read, write, lseek, malloc, free, getpid, kill, signal, sigaction, sigemptyset, setcontext, getcontext, usleep, nanosleep, pause, getline, fopen, fclose, fseek, memset, memcpy.
 
-Joueur 2 :
-./my_navy PID_Joueur_1 fichier_bateaux
+## Project Overview
 
-Le programme prend en entrée le PID (Process ID) du premier joueur (seulement pour le deuxième joueur) et un fichier représentant les positions des navires.  
-Ce fichier doit contenir des lignes formatées de la manière suivante: "LENGTH:FIRST_POSITION:LAST_POSITION", où LENGTH est la longueur du navire et FIRST_POSITION et LAST_POSITION sont ses positions initiales et finales de chaques bateaux.  
-Le fichier doit contenir exactement 4 bateaux de tailles (2, 3, 4 et 5).  
+In "MY_NAVY," each player sets up ships on an 8x8 grid and takes turns guessing the locations of the opponent's ships. The game progresses with each player attempting to hit the opponent's ships by calling out grid coordinates. The first player to sink all of the opponent's ships wins. Communication between the two game instances is achieved using UNIX signals, introducing a complex layer of inter-process communication.
+
+### How to Play
+
+1. **Starting the Game:**
+   - Player 1 starts the game without a PID argument and specifies the path to their navy positions file.
+   - Player 2 starts the game with Player 1's PID as an argument, along with their own navy positions file.
+
+2. **Gameplay:**
+   - Players take turns attacking by specifying grid coordinates.
+   - The game displays each player's own ships and the known status of the opponent's grid after each turn.
+
+3. **Winning the Game:**
+   - The game ends when all of one player's ships have been sunk.
+   - The program outputs "I won" or "Enemy won" and exits with code 0 for a win and 1 for a loss.
+
+### Navy Positions File
+
+The positions file, passed as a parameter, must contain lines formatted as `LENGTH:FIRST_SQUARE:LAST_SQUARE`, specifying the ship's length and start/end coordinates.
+
+## Installation and Compilation
+
+Clone the repository and navigate to the project directory. Compile the program using the provided Makefile:
+
+```bash
+make
+```
+
+## Usage
+
+Player 1:
+```bash
+./my_navy pos1
+```
+Player 2:
+```bash
+./my_navy [Player 1 PID] pos2
+```
+For help:
+```bash
+./my_navy -h
+```
+
+## Features
+
+- Terminal-based Battleship gameplay.
+- Signal-based communication between two instances.
+- Customizable ship positions via a configuration file.
